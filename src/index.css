@@ -1,0 +1,344 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Diablo 3 Paragon Leaderboard - Theme
+   ============================================================ */
+
+:root {
+  /* Core palette */
+  --bg-deep: #070707;
+  --bg-base: #0d0c0a;
+  --bg-card: #141210;
+  --bg-card-alt: #1a1714;
+  --bg-inset: #0a0908;
+
+  --border-subtle: #1f1b16;
+  --border-muted: #2a241c;
+  --border-accent: #3d3426;
+
+  --gold: #d4a017;
+  --gold-bright: #f5c542;
+  --gold-dark: #8a6a1a;
+  --gold-glow: rgba(212, 160, 23, 0.25);
+
+  --silver: #c0c0c0;
+  --bronze: #b87333;
+
+  --green: #4ade80;
+  --green-bright: #22c55e;
+
+  --red: #ef4444;
+
+  --text-primary: #f5f1e8;
+  --text-secondary: #a89f91;
+  --text-muted: #6b6259;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Font utilities */
+.font-serif-display {
+  font-family: 'Cinzel', 'Cinzel Decorative', serif;
+  letter-spacing: 0.04em;
+}
+.font-mono-diablo {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-accent);
+  border-radius: 5px;
+  border: 2px solid var(--bg-deep);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-dark);
+}
+
+/* Gold divider */
+.gold-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
+}
+
+/* Card base */
+.d3-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-muted);
+  border-radius: 6px;
+}
+
+.d3-card-gold {
+  background: var(--bg-card);
+  border: 1px solid var(--gold-dark);
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(212, 160, 23, 0.15), inset 0 0 20px rgba(212, 160, 23, 0.05);
+}
+
+/* Progress bar */
+.progress-track {
+  background: var(--bg-inset);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+}
+.progress-fill-gold {
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-bright));
+  height: 100%;
+  border-radius: 2px;
+  box-shadow: 0 0 8px var(--gold-glow);
+}
+.progress-fill-silver {
+  background: linear-gradient(90deg, #808080, var(--silver));
+  height: 100%;
+  border-radius: 2px;
+}
+.progress-fill-bronze {
+  background: linear-gradient(90deg, #8b5a2b, var(--bronze));
+  height: 100%;
+  border-radius: 2px;
+}
+
+/* Pulse for live indicator */
+@keyframes live-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.live-dot {
+  animation: live-pulse 2s ease-in-out infinite;
+}
+
+/* Row hover */
+.table-row-hover {
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.table-row-hover:hover {
+  background: rgba(212, 160, 23, 0.05);
+}
+
+/* Input styles */
+.d3-input {
+  background: var(--bg-inset);
+  border: 1px solid var(--border-muted);
+  color: var(--text-primary);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.d3-input:focus {
+  outline: none;
+  border-color: var(--gold-dark);
+  box-shadow: 0 0 0 2px var(--gold-glow);
+}
+
+/* Button styles */
+.d3-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-muted);
+  color: var(--text-primary);
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.d3-btn:hover {
+  background: var(--border-subtle);
+  border-color: var(--border-accent);
+}
+.d3-btn-primary {
+  background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+  color: #0a0908;
+  border: 1px solid var(--gold);
+  font-weight: 700;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.1);
+}
+.d3-btn-primary:hover {
+  background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+  border-color: var(--gold-bright);
+}
+.d3-btn-profile {
+  border: 1px solid var(--gold-dark);
+  color: var(--gold-bright);
+  background: rgba(245, 197, 66, 0.06);
+}
+.d3-btn-profile:hover {
+  background: linear-gradient(180deg, var(--gold), var(--gold-dark));
+  color: #0a0908;
+  border-color: var(--gold);
+  font-weight: 700;
+}
+.region-btn:hover:not(.d3-btn-primary) {
+  background: var(--border-subtle);
+  border-color: var(--gold-dark);
+  color: var(--gold-bright);
+}
+
+/* Rank badges */
+.rank-1 {
+  background: linear-gradient(135deg, #f5c542, #d4a017);
+  color: #0a0908;
+  font-weight: 800;
+}
+.rank-2 {
+  background: linear-gradient(135deg, #e0e0e0, #a0a0a0);
+  color: #0a0908;
+  font-weight: 800;
+}
+.rank-3 {
+  background: linear-gradient(135deg, #d89261, #8b5a2b);
+  color: #fff;
+  font-weight: 800;
+}
+.rank-default {
+  background: var(--bg-card-alt);
+  border: 1px solid var(--border-muted);
+  color: var(--text-primary);
+}
+
+/* Glow effects */
+.glow-gold-1 {
+  box-shadow: 0 0 30px rgba(212, 160, 23, 0.3), 0 0 60px rgba(212, 160, 23, 0.1), inset 0 0 30px rgba(212, 160, 23, 0.08);
+  border-color: var(--gold) !important;
+}
+.glow-gold-2 {
+  box-shadow: 0 0 20px rgba(192, 192, 192, 0.15), inset 0 0 20px rgba(192, 192, 192, 0.05);
+  border-color: var(--silver) !important;
+}
+.glow-gold-3 {
+  box-shadow: 0 0 20px rgba(184, 115, 51, 0.2), inset 0 0 20px rgba(184, 115, 51, 0.05);
+  border-color: var(--bronze) !important;
+}
+
+/* Header background pattern */
+.d3-header-bg {
+  background:
+    radial-gradient(ellipse at top, rgba(212, 160, 23, 0.08), transparent 60%),
+    linear-gradient(180deg, #0d0b08, #070707);
+  border-bottom: 1px solid var(--border-muted);
+}
+
+/* Table header */
+.d3-table-header {
+  background: linear-gradient(180deg, var(--bg-card-alt), var(--bg-card));
+  border-bottom: 1px solid var(--border-muted);
+}
+
+/* ── Themes (set data-theme on <html>) ─────────────────────── */
+[data-theme="classic"] {
+  /* same as :root defaults */
+}
+
+[data-theme="blood"] {
+  --bg-deep: #0a0505;
+  --bg-base: #120808;
+  --bg-card: #1a0e0e;
+  --bg-card-alt: #221212;
+  --bg-inset: #0c0606;
+  --border-subtle: #2a1515;
+  --border-muted: #3a1c1c;
+  --border-accent: #5a2828;
+  --gold: #c44;
+  --gold-bright: #f66;
+  --gold-dark: #8a3030;
+  --gold-glow: rgba(204, 68, 68, 0.3);
+  --text-primary: #f8ecec;
+  --text-secondary: #b89898;
+  --text-muted: #7a5555;
+}
+
+[data-theme="frost"] {
+  --bg-deep: #05080c;
+  --bg-base: #0a1018;
+  --bg-card: #101820;
+  --bg-card-alt: #152030;
+  --bg-inset: #080e14;
+  --border-subtle: #1a2838;
+  --border-muted: #243848;
+  --border-accent: #2e4a5e;
+  --gold: #5ba3d9;
+  --gold-bright: #8ecfff;
+  --gold-dark: #3a6d94;
+  --gold-glow: rgba(91, 163, 217, 0.28);
+  --text-primary: #e8f0f8;
+  --text-secondary: #9ab0c4;
+  --text-muted: #6a7e92;
+}
+
+[data-theme="nephalem"] {
+  --bg-deep: #08070a;
+  --bg-base: #100e14;
+  --bg-card: #18141f;
+  --bg-card-alt: #1f1a28;
+  --bg-inset: #0c0a10;
+  --border-subtle: #2a2438;
+  --border-muted: #3a3250;
+  --border-accent: #4a4068;
+  --gold: #a78bfa;
+  --gold-bright: #c4b5fd;
+  --gold-dark: #6d5a9a;
+  --gold-glow: rgba(167, 139, 250, 0.28);
+  --text-primary: #f0ebf8;
+  --text-secondary: #b0a4c8;
+  --text-muted: #786c90;
+}
+
+[data-theme="ember"] {
+  --bg-deep: #0a0704;
+  --bg-base: #120e08;
+  --bg-card: #1a140c;
+  --bg-card-alt: #221a10;
+  --bg-inset: #0c0905;
+  --border-subtle: #2a2010;
+  --border-muted: #3a2e18;
+  --border-accent: #4a3a20;
+  --gold: #e67e22;
+  --gold-bright: #f39c4a;
+  --gold-dark: #a05a18;
+  --gold-glow: rgba(230, 126, 34, 0.28);
+  --text-primary: #f8f0e4;
+  --text-secondary: #b8a890;
+  --text-muted: #7a6c58;
+}
+
+/* Highlight row when using Where am I? */
+@keyframes rowFlash {
+  0% { background-color: rgba(245, 197, 66, 0.35); }
+  40% { background-color: rgba(245, 197, 66, 0.22); }
+  100% { background-color: transparent; }
+}
+tr.row-flash td {
+  animation: rowFlash 4.5s ease-out;
+}
+.table-compact tbody tr {
+  line-height: 1.15;
+}
