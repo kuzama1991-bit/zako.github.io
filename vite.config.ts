@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 // GitHub Pages project site: https://YOUR_USER.github.io/D3Leaderboards/
 // If you use a custom domain or user site (username.github.io), set base: '/'
 export default defineConfig({
-  base: "/D3Leaderboards/",
+  base: "/zako.github.io/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
